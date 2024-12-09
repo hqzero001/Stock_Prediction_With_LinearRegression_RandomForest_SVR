@@ -6,14 +6,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
-# Bước 1: Load dữ liệu từ hai file
+# Load dữ liệu từ hai file
 file1 = "D:\VisualStudio\SaveVS\Stock_Prediction_With_LinearRegression_RandomForest_SVR\SVR\AMD (1980 -11.07.2023).csv"
 file2 = "D:\VisualStudio\SaveVS\Stock_Prediction_With_LinearRegression_RandomForest_SVR\SVR\AMD (2023 - 08.04.2024).csv"
 
 data1 = pd.read_csv(file1)
 data2 = pd.read_csv(file2)
 
-# Bước 2: Tiền xử lý dữ liệu
+#Tiền xử lý dữ liệu
 # Kiểm tra và hợp nhất dữ liệu
 data = pd.concat([data1, data2], ignore_index=True)
 
@@ -37,7 +37,7 @@ X_scaled = scaler.fit_transform(X)
 # Chia dữ liệu thành tập huấn luyện và kiểm tra
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42, shuffle=False)
 
-# Bước 3: Huấn luyện mô hình SVR
+# Huấn luyện mô hình SVR
 model = SVR(kernel='rbf', C=100, gamma=0.1, epsilon=0.1)
 model.fit(X_train, y_train)
 
@@ -50,7 +50,7 @@ r2 = r2_score(y_test, y_pred)
 print(f"Mean Squared Error: {mse}")
 print(f"R^2 Score: {r2}")
 
-# Bước 4: Dự đoán trên toàn bộ dữ liệu để vẽ biểu đồ
+# Dự đoán trên toàn bộ dữ liệu để vẽ biểu đồ
 data['Predicted_Close'] = model.predict(X_scaled)
 
 # Vẽ biểu đồ
